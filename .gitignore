@@ -1,0 +1,25 @@
+# Banco de Dados Local
+**/postgres_data/
+
+# Java / Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+/mvnw
+/mvnw.cmd
+.mvn/
+
+# IDEs (IntelliJ e VS Code)
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+
+# Logs e arquivos de sistema
+*.log
+.DS_Store
+Thumbs.db
+HELP.md
+
+# Arquivos de segredos locais
+.env
