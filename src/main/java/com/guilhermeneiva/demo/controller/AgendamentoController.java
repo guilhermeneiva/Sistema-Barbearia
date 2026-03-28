@@ -1,5 +1,6 @@
 package com.guilhermeneiva.demo.controller;
 
+import com.guilhermeneiva.demo.config.JWTUserData;
 import com.guilhermeneiva.demo.dto.request.AgendamentoRequestDTO;
 import com.guilhermeneiva.demo.dto.response.AgendamentoResponseDTO;
 import com.guilhermeneiva.demo.model.service.AgendamentoService;
@@ -7,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -64,5 +66,16 @@ public class AgendamentoController {
     public ResponseEntity<Void> cancelarAgendamento(@PathVariable Long id) {
         agendamentoService.cancelarAgendamento(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/meus-agendamentos")
+    public ResponseEntity<Page<AgendamentoResponseDTO>> findMeusAgendamentos(
+            @AuthenticationPrincipal JWTUserData loggedUser,
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "10") Integer size,
+            @RequestParam(defaultValue = "dataInicio") String orderBy,
+            @RequestParam(defaultValue = "ASC") String direction) {
+        Page<AgendamentoResponseDTO> agendamentos = agendamentoService.findByCliente(loggedUser.userId(), page, size, orderBy, direction);
+        return ResponseEntity.ok(agendamentos);
     }
 }

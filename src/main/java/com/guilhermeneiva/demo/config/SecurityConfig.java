@@ -54,6 +54,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/servicos/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/clientes").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/clientes/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/agendamentos").hasAnyRole("ADMIN")
 
                         // BARBEIRO + ADMIN
                         .requestMatchers(HttpMethod.GET, "/agendamentos/barbeiro/**").hasAnyRole("BARBEIRO", "ADMIN")
@@ -61,7 +62,7 @@ public class SecurityConfig {
                         // CLIENTE + ADMIN
                         .requestMatchers(HttpMethod.POST, "/agendamentos").hasAnyRole("CLIENTE", "ADMIN")
                         .requestMatchers(HttpMethod.PATCH, "/agendamentos/*/cancelar").hasAnyRole("CLIENTE", "ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/agendamentos").hasAnyRole("CLIENTE", "ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/agendamentos/meus-agendamentos").hasAnyRole("CLIENTE", "ADMIN")
                         .requestMatchers(HttpMethod.GET, "/barbeiros/**").hasAnyRole("CLIENTE", "ADMIN")
                         .requestMatchers(HttpMethod.GET, "/servicos/**").hasAnyRole("CLIENTE", "ADMIN")
 

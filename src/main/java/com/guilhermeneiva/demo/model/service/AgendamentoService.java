@@ -135,4 +135,10 @@ public class AgendamentoService {
             throw new HorasParaAgendamentoException("O cancelamento deve ser feito com pelo menos 2 horas de antecedência!");
         }
     }
+
+    public Page<AgendamentoResponseDTO> findByCliente(Long clienteId, Integer page, Integer size, String orderBy, String direction) {
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.valueOf(direction), orderBy);
+        Page<Agendamento> agendamentos = agendamentoRepository.findByClienteId(clienteId, pageRequest);
+        return agendamentoMapper.toPage(agendamentos);
+    }
 }

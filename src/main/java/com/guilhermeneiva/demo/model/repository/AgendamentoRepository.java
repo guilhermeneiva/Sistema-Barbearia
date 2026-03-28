@@ -25,5 +25,7 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> 
     @Query("SELECT a FROM Agendamento a WHERE a.barbeiro.id = :barbeiroId")
     Page<Agendamento> findByBarbeiro(Long barbeiroId, PageRequest pageRequest);
 
+    Page<Agendamento> findByClienteId(Long clienteId, PageRequest pageRequest);
+
     Page<Agendamento> findByBarbeiroIdAndDataInicioBetween(Long barbeiroId, LocalDateTime data_inicio, LocalDateTime fim_data, PageRequest pageRequest);
 }
