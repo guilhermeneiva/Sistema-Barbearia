@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -63,8 +64,8 @@ public class AgendamentoController {
     }
 
     @PatchMapping("/{id}/cancelar")
-    public ResponseEntity<Void> cancelarAgendamento(@PathVariable Long id) {
-        agendamentoService.cancelarAgendamento(id);
+    public ResponseEntity<Void> cancelarAgendamento(@PathVariable Long id, @AuthenticationPrincipal JWTUserData loggedUser) {
+        agendamentoService.cancelarAgendamento(id, loggedUser.userId());
         return ResponseEntity.noContent().build();
     }
 

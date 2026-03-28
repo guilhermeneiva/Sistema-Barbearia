@@ -138,4 +138,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         );
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(mensagemErro);
     }
+
+    @ExceptionHandler(UsuarioNaoAutorizadoException.class)
+    public ResponseEntity<MensagemErro> handleUsuarioNaoAutorizado(UsuarioNaoAutorizadoException ex, HttpServletRequest request) {
+        // Adicione um System.out.println aqui só para ter 100% de certeza que a mensagem chegou no Handler
+        System.out.println("Mensagem capturada: " + ex.getMessage());
+
+        MensagemErro erro = new MensagemErro(
+                LocalDateTime.now(),
+                HttpStatus.FORBIDDEN,
+                ex.getMessage(), // Se o println acima funcionou, o problema é no Getter da classe MensagemErro
+                request.getRequestURI()
+        );
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(erro);
+    }
 }

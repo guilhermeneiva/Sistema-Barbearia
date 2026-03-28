@@ -111,9 +111,13 @@ public class AgendamentoService {
         }
     }
 
-    public void cancelarAgendamento(Long id) {
+    public void cancelarAgendamento(Long id, Long userIdLogado) {
         Agendamento agendamento = agendamentoRepository.findById(id)
                 .orElseThrow(() -> new AgendamentoNaoEncontradoException("Agendamento com o ID " + id + " não encontrado!"));
+
+        if (!agendamento.getCliente().getId().equals(userIdLogado)){
+            throw new UsuarioNaoAutorizadoException("Forbidden");
+        }
 
         if (agendamento.getStatusAgendamento() == StatusAgendamento.CANCELADO) {
             throw new AgendamentoJaCanceladoException("Agendamento com o ID " + id + " já está cancelado!");
