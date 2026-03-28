@@ -47,7 +47,6 @@ public class SecurityConfig {
                         // Apenas ADMIN
                         .requestMatchers(HttpMethod.POST, "/auth/register/admin").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/barbeiros").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/barbeiros/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/barbeiros/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/servicos").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/servicos/**").hasRole("ADMIN")
@@ -58,6 +57,7 @@ public class SecurityConfig {
 
                         // BARBEIRO + ADMIN
                         .requestMatchers(HttpMethod.GET, "/agendamentos/barbeiro/**").hasAnyRole("BARBEIRO", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/barbeiros/**").hasAnyRole("BARBEIRO","ADMIN")
 
                         // CLIENTE + ADMIN
                         .requestMatchers(HttpMethod.POST, "/agendamentos").hasAnyRole("CLIENTE", "ADMIN")
