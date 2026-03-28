@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -57,6 +58,7 @@ public class ClienteController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.userId")
     public ResponseEntity<ClienteResponseDTO> update(@PathVariable @Valid Long id, @RequestBody ClienteRequestDTO clienteRequestDTO) {
         ClienteResponseDTO clienteResponseDTO = clienteService.update(id, clienteRequestDTO);
         return ResponseEntity.ok(clienteResponseDTO);
