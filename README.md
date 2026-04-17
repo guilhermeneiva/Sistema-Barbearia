@@ -1,9 +1,9 @@
 # 💈 BarberFlow API - Sistema de Agendamentos
 
-API REST para gerenciamento de barbearia, desenvolvida com **Java 17** e **Spring Boot**. O foco do projeto é garantir a integridade da agenda através de regras de negócio rigorosas e validações de conflitos.
+API REST para gerenciamento de barbearia, desenvolvida com **Java 21** e **Spring Boot**. O foco do projeto é garantir a integridade da agenda através de regras de negócio rigorosas e validações de conflitos.
 
 ## 🚀 Tecnologias
-* **Java 17**
+* **Java 21**
 * **Spring Boot 3**
 * **Spring Data JPA** (PostgreSQL)
 * **Bean Validation** (@Future, @Valid, etc)
